@@ -1,0 +1,11 @@
+**.iml
+**.pyc
+**.log
+**.egg-info
+.idea/*
+.pytest_cache/*
+/**/dist/*
+/**/build/*
+.coverage
+htmlcov/*
+tests/__out__/*
