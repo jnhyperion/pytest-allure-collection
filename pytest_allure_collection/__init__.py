@@ -28,7 +28,7 @@ def pytest_collection(session):
             file_path, line_no, method_name = test.location
             test_dict = {
                 "name": test.name,
-                "location": f"{file_path}#{method_name}#{line_no}",
+                "location": f"{file_path}::{method_name.replace('.', '::')}",
                 "markers": {},
             }
             markers = test.iter_markers()

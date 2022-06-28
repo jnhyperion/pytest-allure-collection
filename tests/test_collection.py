@@ -1,5 +1,6 @@
 import os
 import pytest
+import json
 from pathlib import Path
 
 tests_dir = os.path.abspath(os.path.dirname(__file__))
@@ -20,9 +21,13 @@ def setup_conftest(testdir):
 
 
 @pytest.fixture
-def expected_json(request) -> str:
-    with open(os.path.join(tests_dir, "json", f"{request.node.name}.json")) as f:
-        return f.read()
+def expected_json(request) -> list:
+    with open(os.path.join(tests_dir, "data", f"{request.node.name}.json")) as f:
+        return load_sorted_json(f)
+
+
+def load_sorted_json(f):
+    return sorted(json.load(f), key=lambda x: x["location"])
 
 
 def test_allure_collect_recursive_folder(testdir, expected_json):
@@ -79,7 +84,7 @@ def test_allure_collect_recursive_folder(testdir, expected_json):
     json_out = os.path.join(root_folder, "allure_collection.json")
     assert os.path.exists(json_out)
     with open(json_out) as f:
-        actual = f.read()
+        actual = load_sorted_json(f)
         assert actual == expected_json
 
 
@@ -93,7 +98,7 @@ def test_no_allure_marker(testdir, expected_json):
     json_out = os.path.join(str(testdir), "allure_collection.json")
     assert os.path.exists(json_out)
     with open(json_out) as f:
-        actual = f.read()
+        actual = load_sorted_json(f)
         assert actual == expected_json
 
 
@@ -109,7 +114,53 @@ def test_non_allure_marker(testdir, expected_json):
     json_out = os.path.join(str(testdir), "allure_collection.json")
     assert os.path.exists(json_out)
     with open(json_out) as f:
-        actual = f.read()
+        actual = load_sorted_json(f)
+        assert actual == expected_json
+
+
+def test_cases_with_class_and_allure_marker(testdir, expected_json):
+    test_src = """
+    import pytest
+    import allure
+    class TestFooClass:
+        @allure.title("my title bar")
+        @allure.description("description")
+        def test_foo(self):
+            assert 1 == 1
+    """
+    testdir.makepyfile(test_src)
+    testdir.runpytest("--co", "--collect-allure")
+    json_out = os.path.join(str(testdir), "allure_collection.json")
+    assert os.path.exists(json_out)
+    with open(json_out) as f:
+        actual = load_sorted_json(f)
+        assert actual == expected_json
+
+
+def test_parameterized_cases_with_class_and_allure_marker(testdir, expected_json):
+    test_src = """
+    import pytest
+    import allure
+    @pytest.fixture
+    def data(request):
+        return request.param
+    class TestFooClass:
+        @allure.title("my title bar")
+        @allure.description("description")
+        @pytest.mark.parametrize(
+           "data",
+           ["1", "2","3"],
+           indirect=True,
+        )
+        def test_foo(self, data):
+            assert 1 == 1
+    """
+    testdir.makepyfile(test_src)
+    testdir.runpytest("--co", "--collect-allure")
+    json_out = os.path.join(str(testdir), "allure_collection.json")
+    assert os.path.exists(json_out)
+    with open(json_out) as f:
+        actual = load_sorted_json(f)
         assert actual == expected_json
 
 
@@ -176,7 +227,7 @@ def test_with_allure_markers(testdir, expected_json):
     json_out = os.path.join(str(testdir), "allure_collection.json")
     assert os.path.exists(json_out)
     with open(json_out) as f:
-        actual = f.read()
+        actual = load_sorted_json(f)
         assert actual == expected_json
 
 
@@ -220,7 +271,7 @@ def test_multi_cases_with_allure_markers(testdir, expected_json):
     json_out = os.path.join(str(testdir), "allure_collection.json")
     assert os.path.exists(json_out)
     with open(json_out) as f:
-        actual = f.read()
+        actual = load_sorted_json(f)
         assert actual == expected_json
 
 
