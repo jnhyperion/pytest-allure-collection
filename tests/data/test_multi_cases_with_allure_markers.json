@@ -3,7 +3,7 @@
     "name": "test_foo",
     "location": "test_multi_cases_with_allure_markers.py::test_foo",
     "markers": {
-      "allure_tile": "my title",
+      "allure_title": "my title",
       "allure_test_case": {
         "url": "case_link",
         "name": "case_link"

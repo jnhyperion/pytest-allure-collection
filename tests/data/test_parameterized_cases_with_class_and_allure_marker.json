@@ -3,7 +3,7 @@
     "name": "test_foo[1]",
     "location": "test_parameterized_cases_with_class_and_allure_marker.py::TestFooClass::test_foo[1]",
     "markers": {
-      "allure_tile": "my title bar",
+      "allure_title": "my title bar",
       "allure_description": "description"
     }
   },
@@ -11,7 +11,7 @@
     "name": "test_foo[3]",
     "location": "test_parameterized_cases_with_class_and_allure_marker.py::TestFooClass::test_foo[3]",
     "markers": {
-      "allure_tile": "my title bar",
+      "allure_title": "my title bar",
       "allure_description": "description"
     }
   },
@@ -19,7 +19,7 @@
     "name": "test_foo[2]",
     "location": "test_parameterized_cases_with_class_and_allure_marker.py::TestFooClass::test_foo[2]",
     "markers": {
-      "allure_tile": "my title bar",
+      "allure_title": "my title bar",
       "allure_description": "description"
     }
   }

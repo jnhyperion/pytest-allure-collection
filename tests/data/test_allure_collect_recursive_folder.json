@@ -3,7 +3,7 @@
     "name": "test_foo",
     "location": "test_bar.py::test_foo",
     "markers": {
-      "allure_tile": "my title",
+      "allure_title": "my title",
       "allure_description": "description",
       "allure_tag": [
         "tag1",
@@ -15,7 +15,7 @@
     "name": "test_bar",
     "location": "test_bar.py::test_bar",
     "markers": {
-      "allure_tile": "my title bar",
+      "allure_title": "my title bar",
       "allure_description": "description",
       "allure_tag": [
         "tag1",
@@ -34,7 +34,7 @@
     "name": "test_bar",
     "location": "test_foo.py::test_bar",
     "markers": {
-      "allure_tile": "my title bar",
+      "allure_title": "my title bar",
       "allure_description": "description",
       "allure_tag": [
         "tag1",
@@ -46,7 +46,7 @@
     "name": "test_foo",
     "location": "test_foo.py::test_foo",
     "markers": {
-      "allure_tile": "my title",
+      "allure_title": "my title",
       "allure_description": "description",
       "allure_tag": [
         "tag1",

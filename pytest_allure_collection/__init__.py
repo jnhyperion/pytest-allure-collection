@@ -34,7 +34,7 @@ def pytest_collection(session):
             markers = test.iter_markers()
             title = getattr(test._obj, "__allure_display_name__", None)
             if title:
-                test_dict["markers"]["allure_tile"] = title
+                test_dict["markers"]["allure_title"] = title
             for marker in markers:
                 if marker.name in (
                     ALLURE_DESCRIPTION_MARK,
