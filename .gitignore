@@ -9,3 +9,4 @@
 .coverage
 htmlcov/*
 tests/__out__/*
+.tox

@@ -25,7 +25,7 @@ def pytest_collection(session):
     if session.config.option.collectonly and should_collect:
         results = []
         for test in session.items:
-            file_path, line_no, method_name = test.location
+            file_path, _, method_name = test.location
             test_dict = {
                 "name": test.name,
                 "location": f"{file_path}::{method_name.replace('.', '::')}",
