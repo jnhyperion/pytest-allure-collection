@@ -3,7 +3,7 @@
     "name": "test_foo",
     "location": "test_cases_with_class_and_allure_marker.py::TestFooClass::test_foo",
     "markers": {
-      "allure_tile": "my title bar",
+      "allure_title": "my title bar",
       "allure_description": "description"
     }
   }

@@ -29,7 +29,7 @@ def test_foo():
       "name":"test_foo",
       "location":"test_example.py#test_foo#2",
       "markers":{
-         "allure_tile":"my title",
+         "allure_title":"my title",
          "allure_description":"description",
          "allure_tag":[
             "tag1",
