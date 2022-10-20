@@ -2,6 +2,7 @@ from .__version__ import __version__
 import os
 import json
 import pytest
+import platform
 from allure_pytest.utils import (
     ALLURE_DESCRIPTION_MARK,
     ALLURE_DESCRIPTION_HTML_MARK,
@@ -26,6 +27,7 @@ def pytest_collection(session):
         results = []
         for test in session.items:
             file_path, _, method_name = test.location
+            file_path = file_path.replace("\\", "/") if platform.system().lower() == "windows" else file_path
             test_dict = {
                 "name": test.name,
                 "location": f"{file_path}::{method_name.replace('.', '::')}",
