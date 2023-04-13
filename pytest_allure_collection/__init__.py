@@ -36,6 +36,7 @@ def pytest_collection(session):
                 "name": test.name,
                 "location": f"{file_path}::{method_name.replace('.', '::')}",
                 "markers": {},
+                "source": test.fspath.strpath,
             }
             markers = test.iter_markers()
             title = getattr(test._obj, "__allure_display_name__", None)
